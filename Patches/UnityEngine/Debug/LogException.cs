@@ -11,7 +11,9 @@ namespace Peroxide.Patches.UnityEngine.Debug
         {
             private static bool Prefix(Exception exception)
             {
+#if DEBUG
                 Console.WriteLine(exception);
+#endif
                 return false;
             }
         }
@@ -22,7 +24,9 @@ namespace Peroxide.Patches.UnityEngine.Debug
         {
             private static bool Prefix(Exception exception, global::UnityEngine.Object context)
             {
-                Console.WriteLine($"{exception}\n{typeof(global::UnityEngine.Debug).FullName}:Log (object, {context.GetType().FullName})");
+#if DEBUG
+                Console.WriteLine(exception);
+#endif
                 return false;
             }
         }

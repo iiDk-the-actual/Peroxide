@@ -11,7 +11,9 @@ namespace Peroxide.Patches.UnityEngine.Debug
         {
             private static bool Prefix(object message)
             {
+#if DEBUG
                 System.Console.WriteLine(message);
+#endif
                 return false;
             }
         }
@@ -22,7 +24,9 @@ namespace Peroxide.Patches.UnityEngine.Debug
         {
             private static bool Prefix(object message, Object context)
             {
-                System.Console.WriteLine($"{message}\n{typeof(global::UnityEngine.Debug).FullName}:Log (object, {context.GetType().FullName})");
+#if DEBUG
+                System.Console.WriteLine(message);
+#endif
                 return false;
             }
         }
@@ -34,9 +38,11 @@ namespace Peroxide.Patches.UnityEngine.Debug
         [HarmonyPriority(Priority.First)]
         public static class LogObject
         {
-            private static bool Prefix(string format, params object[] args)
+            private static bool Prefix(string format, object[] args)
             {
+#if DEBUG
                 System.Console.WriteLine(string.Format(format, args));
+#endif
                 return false;
             }
         }
@@ -45,9 +51,11 @@ namespace Peroxide.Patches.UnityEngine.Debug
         [HarmonyPriority(Priority.First)]
         public static class LogContext
         {
-            private static bool Prefix(Object context, string format, params object[] args)
+            private static bool Prefix(Object context, string format, object[] args)
             {
-                System.Console.WriteLine($"{string.Format(format, args)}\n{typeof(global::UnityEngine.Debug).FullName}:Log (object, {context.GetType().FullName})");
+#if DEBUG
+                System.Console.WriteLine(string.Format(format, args));
+#endif
                 return false;
             }
         }
