@@ -5,7 +5,7 @@
     /// </summary>
     public static class PluginInfo
     {
-        public const string GUID = "0000.goldentrophy.gorillatag.peroxide";
+        public const string GUID = "0000.0000.goldentrophy.peroxide";
         public const string Name = "Peroxide";
         public const string Version = "1.0.0";
     }
